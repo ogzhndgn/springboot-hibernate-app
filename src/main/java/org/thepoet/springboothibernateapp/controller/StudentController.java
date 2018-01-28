@@ -37,7 +37,6 @@ public class StudentController {
     }
 
     @PostMapping("student/add")
-//    public ResponseEntity<Void> addStudent(@RequestBody Student student, UriComponentsBuilder builder) {
     public ResponseEntity<Void> addStudent(HttpServletRequest request, UriComponentsBuilder builder) {
         boolean result = studentService.addStudent(request.getParameter("name"), request.getParameter("surname"), Integer.parseInt(request.getParameter("grade")));
         if (!result) {
@@ -46,5 +45,18 @@ public class StudentController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(builder.path("students").build().toUri());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @PostMapping("student/update")
+    public ResponseEntity<Void> updateStudent(HttpServletRequest request, UriComponentsBuilder builder) {
+        int studentId = Integer.parseInt(request.getParameter("id"));
+        int newGrade = Integer.parseInt(request.getParameter("newGrade"));
+        boolean result = studentService.updateStudent(studentId, newGrade);
+        if (!result) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("students").build().toUri());
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 }

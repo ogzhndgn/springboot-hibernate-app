@@ -14,4 +14,6 @@ public interface StudentService {
     Student getStudentById(int id);
 
     boolean addStudent(String name, String surname, int grade);
+
+    boolean updateStudent(int id, int newGrade);
 }

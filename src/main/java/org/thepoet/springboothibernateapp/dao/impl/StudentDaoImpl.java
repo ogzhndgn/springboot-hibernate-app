@@ -37,4 +37,9 @@ public class StudentDaoImpl implements StudentDao {
     public void add(Student student) {
         entityManager.persist(student);
     }
+
+    @Override
+    public void update(Student student) {
+        entityManager.persist(student);
+    }
 }

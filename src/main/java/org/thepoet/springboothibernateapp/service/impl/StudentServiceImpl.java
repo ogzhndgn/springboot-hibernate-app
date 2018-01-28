@@ -42,4 +42,17 @@ public class StudentServiceImpl implements StudentService {
             return false;
         }
     }
+
+    @Override
+    public boolean updateStudent(int id, int newGrade) {
+        try {
+            Student student = this.getStudentById(id);
+            student.setGrade(newGrade);
+            studentDao.update(student);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
