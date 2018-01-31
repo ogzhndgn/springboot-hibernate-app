@@ -1,5 +1,6 @@
 package org.thepoet.springboothibernateapp.dao.spec;
 
+import org.springframework.data.repository.CrudRepository;
 import org.thepoet.springboothibernateapp.model.Student;
 
 import java.util.List;
@@ -8,12 +9,15 @@ import java.util.List;
  * @author the Poet <dogan_oguzhan@hotmail.com>
  * @date 25.01.2018
  */
-public interface StudentDao {
-    List<Student> getAll();
+public interface StudentDao extends CrudRepository<Student, Long> {
+    List<Student> getAllByGradeGreaterThan(int grade);
 
     Student getById(int id);
 
-    void add(Student student);
+    List<Student> getAll();
 
-    void update(Student student);
+    List<Student> getAllByName(String name);
+
+    
+
 }

@@ -59,4 +59,18 @@ public class StudentController {
         headers.setLocation(builder.path("students").build().toUri());
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
+
+    @PostMapping("student/getallbyname")
+    public ResponseEntity<List<Student>> getAllByName(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        List<Student> studentList = studentService.getStudentListByName(name);
+        return new ResponseEntity<>(studentList, HttpStatus.OK);
+    }
+
+    @PostMapping("student/getallbygrade")
+    public ResponseEntity<List<Student>> getAllStudentGreaterGrade(HttpServletRequest request) {
+        String grade = request.getParameter("grade");
+        List<Student> studentList = studentService.getAllStudentsByGrade(Integer.parseInt(grade));
+        return new ResponseEntity<>(studentList, HttpStatus.OK);
+    }
 }

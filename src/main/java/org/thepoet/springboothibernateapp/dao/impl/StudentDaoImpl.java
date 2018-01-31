@@ -2,7 +2,6 @@ package org.thepoet.springboothibernateapp.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.thepoet.springboothibernateapp.dao.spec.StudentDao;
 import org.thepoet.springboothibernateapp.model.Student;
 
 import javax.persistence.EntityManager;
@@ -16,29 +15,29 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<Student> getAll() {
         String hql = "FROM " + Student.class.getName() + " ORDER BY id";
         return (List<Student>) entityManager.createQuery(hql).getResultList();
     }
 
-    @Override
     public Student getById(int id) {
         return entityManager.find(Student.class, id);
     }
 
-    @Override
+    public List<Student> queryFirstByGradeGreaterThanAnd(int grade) {
+        return null;
+    }
+    
     public void add(Student student) {
         entityManager.persist(student);
     }
 
-    @Override
     public void update(Student student) {
         entityManager.persist(student);
     }

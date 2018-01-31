@@ -2,6 +2,7 @@ package org.thepoet.springboothibernateapp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thepoet.springboothibernateapp.dao.impl.StudentDaoImpl;
 import org.thepoet.springboothibernateapp.dao.spec.StudentDao;
 import org.thepoet.springboothibernateapp.model.Student;
 import org.thepoet.springboothibernateapp.service.spec.StudentService;
@@ -17,6 +18,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private StudentDaoImpl studentDaoImpl;
 
     @Override
     public List<Student> getAllStudentList() {
@@ -35,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
             student.setName(name);
             student.setSurname(surname);
             student.setGrade(grade);
-            studentDao.add(student);
+            studentDaoImpl.add(student);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,11 +52,23 @@ public class StudentServiceImpl implements StudentService {
         try {
             Student student = this.getStudentById(id);
             student.setGrade(newGrade);
-            studentDao.update(student);
+            studentDaoImpl.update(student);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
+    @Override
+    public List<Student> getStudentListByName(String name) {
+        return studentDao.getAllByName(name);
+    }
+
+    @Override
+    public List<Student> getAllStudentsByGrade(int grade) {
+        return studentDao.getAllByGradeGreaterThan(grade);
+    }
+
+
 }
