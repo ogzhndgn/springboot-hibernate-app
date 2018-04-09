@@ -30,10 +30,6 @@ public class StudentDaoImpl {
         return entityManager.find(Student.class, id);
     }
 
-    public List<Student> queryFirstByGradeGreaterThanAnd(int grade) {
-        return null;
-    }
-    
     public void add(Student student) {
         entityManager.persist(student);
     }

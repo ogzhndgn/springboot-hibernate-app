@@ -18,6 +18,6 @@ public interface StudentDao extends CrudRepository<Student, Long> {
 
     List<Student> getAllByName(String name);
 
-    
+    List<Student> getAllBySurname(String surname);
 
 }
