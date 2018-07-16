@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 public class StudentController {
     @Autowired
-    StudentService studentService;
+    private StudentService studentService;
 
     @GetMapping("students")
     public ResponseEntity<List<Student>> getAllStudents() {
